@@ -5,8 +5,10 @@
         static void Main(string[] args)
         {
             //Console.WriteLine("Welcome to Data structure algorithms");
-            BinarySearch.Binary_Search();
+            //BinarySearch.Binary_Search();
+            InsertionSort.Insertion_Sort();
         
         }
+
     }
 }
