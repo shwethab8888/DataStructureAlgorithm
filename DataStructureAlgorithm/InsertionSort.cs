@@ -8,7 +8,7 @@ namespace DataStructureAlgorithm
 {
     public class InsertionSort
     {
-        public static void InsertionSortStringArray(string[] arr)
+        public static void Sort(string[] arr)
         {
             int i, j;
             string key;
@@ -29,12 +29,11 @@ namespace DataStructureAlgorithm
 
         public static void Insertion_Sort()
         {
-            Console.WriteLine("Enter a list of words separated by spaces:");
+            Console.WriteLine("Enter a list of words :");
             string input = Console.ReadLine();
             string[] words = input.Split(' ');
 
-            // Perform insertion sort on the array of words
-            InsertionSortStringArray(words);
+            Sort(words);
 
             Console.WriteLine("Sorted List:");
             foreach (string word in words)

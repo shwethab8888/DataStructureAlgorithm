@@ -8,7 +8,8 @@
             //BinarySearch.Binary_Search();
             //InsertionSort.Insertion_Sort();
             //BubbleSort.Bubble_Sort();
-            MergeSort.Merge_Sort();
+            // MergeSort.Merge_Sort();
+            PrimeNumber.Prime_Number();
         }
 
     }
