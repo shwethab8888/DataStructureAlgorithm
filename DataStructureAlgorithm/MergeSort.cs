@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,77 +8,80 @@ namespace DataStructureAlgorithm
 {
     public class MergeSort
     {
-            private string[] arr;
-            private string[] tempArr;
-
-            public void Merge_Sort(string[] arr)
+        public static void Sort(string[] arr, int left, int right)
+        {
+            if (left < right)
             {
-                this.arr = arr;
-                int n = arr.Length;
-                this.tempArr = new string[n];
-                Merge_Sort_Helper(0, n - 1);
+                int mid = (left + right) / 2;
+                Sort(arr, left, mid);
+                Sort(arr, mid + 1, right);
+                Merge(arr, left, mid, right);
+            }
+        }
+
+        public static void Merge(string[] arr, int left, int mid, int right)
+        {
+            int n1 = mid - left + 1;
+            int n2 = right - mid;
+
+            string[] leftArr = new string[n1];
+            string[] rightArr = new string[n2];
+
+            int i, j;
+
+            for (i = 0; i < n1; i++)
+            {
+                leftArr[i] = arr[left + i];
             }
 
-            private void Merge_Sort_Helper(int left, int right)
+            for (j = 0; j < n2; j++)
             {
-                if (left < right)
-                {
-                    int mid = (left + right) / 2;
-                    Merge_Sort_Helper(left, mid);
-                    Merge_Sort_Helper(mid + 1, right);
-                    Merge(left, mid, right);
-                }
+                rightArr[j] = arr[mid + 1 + j];
             }
 
-            private void Merge(int left, int mid, int right)
+            i = 0;
+            j = 0;
+            int k = left;
+
+            while (i < n1 && j < n2)
             {
-                for (int i = left; i <= right; i++)
+                if (leftArr[i].CompareTo(rightArr[j]) < 0)
                 {
-                    tempArr[i] = arr[i];
+                    arr[k] = leftArr[i];
+                    i++;
                 }
-
-                int leftIndex = left;
-                int rightIndex = mid + 1;
-                int currentIndex = left;
-
-                while (leftIndex <= mid && rightIndex <= right)
+                else
                 {
-                    if (string.Compare(tempArr[leftIndex], tempArr[rightIndex]) < 0)
-                    {
-                        arr[currentIndex] = tempArr[leftIndex];
-                        leftIndex++;
-                    }
-                    else
-                    {
-                        arr[currentIndex] = tempArr[rightIndex];
-                        rightIndex++;
-                    }
-                    currentIndex++;
+                    arr[k] = rightArr[j];
+                    j++;
                 }
-
-                while (leftIndex <= mid)
-                {
-                    arr[currentIndex] = tempArr[leftIndex];
-                    leftIndex++;
-                    currentIndex++;
-                }
+                k++;
             }
-        
+
+            while (i < n1)
+            {
+                arr[k] = leftArr[i];
+                i++;
+                k++;
+            }
+
+            while (j < n2)
+            {
+                arr[k] = rightArr[j];
+                j++;
+                k++;
+            }
+        }
+
+
         public static void Merge_Sort()
         {
-
-            Console.Write("Enter a list of strings separated by spaces: ");
-            string[] arr = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-            MergeSort mergeSort = new MergeSort();
-            mergeSort.Merge_Sort(arr);
-
-            Console.WriteLine("Sorted list:");
-            foreach (string s in arr)
-            {
-                Console.Write(s + " ");
-            }
-            Console.WriteLine();
+            string[] arr = { "apple", "banana", "orange", "grape", "pear" };
+            Console.WriteLine("Before sorting:");
+            Console.WriteLine(string.Join(", ", arr));
+            Sort(arr, 0, arr.Length - 1);
+            Console.WriteLine("After sorting:");
+            Console.WriteLine(string.Join(", ", arr));
         }
     }
 
